@@ -1,7 +1,6 @@
 package prob01;
 import java.util.Scanner;
 
-
 public class Gugudan {
 	
 	static int resultNumber = 0;
@@ -14,8 +13,14 @@ public class Gugudan {
 
 		int[] answerNumbers = randomizeAnswers();
 		int loc = randomize( 0, 8 );
-		answerNumbers[ loc ] = resultNumber;
-		
+		/**
+		 * 이 부분 수정
+		 * 답이 이미 answer 배열 내에 존재한다면
+		 * 답을 저장하지 않음
+		 */
+		if( ! arrayContains(answerNumbers, resultNumber))
+			answerNumbers[ loc ] = resultNumber;
+		/*------------------*/
 		System.out.println( l + " x " + r + " = ?" );
 		
 		int length = answerNumbers.length;
@@ -33,12 +38,19 @@ public class Gugudan {
 		System.out.print( "answer:" );
 
 		Scanner s = new Scanner( System.in );
-		//
-		//  이 부분에 적당한 코드를 작성합니다.  
-		//
+		/**
+		 * 구현부
+		 */
+		int userInput = s.nextInt();
+		if(userInput == resultNumber) {
+			System.out.println("정답");
+		}else {
+			System.out.println("오답");
+		}
+		s.close();
 	}
 
-	private static int randomize( int lNum, int rNum ) {
+	private static int randomize( int lNum, int rNum ) {	// 한 자리수 난수 하나 생성
         int random = (int) ( Math.random() * rNum ) + lNum;
         return random;
 	}
@@ -57,7 +69,7 @@ public class Gugudan {
 	        
 	        boolean evaluted = false;
 	        for( int i = 0; i < occupied; i++ ) {
-	        	if( /* 이 부분에 적당 조건의 코드를 입력 합니다. */ ) {
+	        	if( boardNumbers[i] == random) {	//중복 검사 코드
 	        		evaluted = true;
 	        		break;
 	        	}
@@ -70,4 +82,18 @@ public class Gugudan {
 		
         return boardNumbers;
 	}	
+	
+	/**
+	 * 배열 중복 검사 메소드
+	 * @return 존재 시 true, 아닐 시 false
+	 */
+	private static boolean arrayContains(int[] arr, int target) {
+		int len = arr.length;
+		for(int i = 0 ; i < len; i++) {
+			if(arr[i] == target)
+				return true;
+		}
+		
+		return false;
+	}
 }
