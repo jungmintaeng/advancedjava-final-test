@@ -30,6 +30,7 @@ public class LoginMain {
 		}catch(PasswordDismatchException pdmex) {
 			System.out.println("비밀번호가 틀렸습니다.");
 		}
+		scanner.close();
 	}
 	
 	public static void login(List<User> users, User user ) throws UserNotFoundException, PasswordDismatchException {
