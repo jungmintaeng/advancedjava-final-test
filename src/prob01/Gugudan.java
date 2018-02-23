@@ -1,4 +1,5 @@
 package prob01;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Gugudan {
@@ -41,7 +42,15 @@ public class Gugudan {
 		/**
 		 * 구현부
 		 */
-		int userInput = s.nextInt();
+		int userInput = 0;
+		try {
+			userInput = s.nextInt();
+		}catch(InputMismatchException imex) {
+			System.out.println("잘못된 입력입니다.");
+			s.close();
+			return;
+		}
+		
 		if(userInput == resultNumber) {
 			System.out.println("정답");
 		}else {
